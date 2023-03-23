@@ -1,15 +1,12 @@
 import { useState } from "react";
-import { Route } from "react-router-dom";
-import { Home } from "./views/Home";
+
+import { RouterProvider } from "react-router-dom";
+import { router } from "./routes/router";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <div className="App">
-      <Route path="/" element={<Home />} />
-      <Route path="/services" element={<Home />} />
-      <Route path="/materiel" element={<Home />} />
+      <RouterProvider router={router} />
     </div>
   );
 }
