@@ -1,5 +1,5 @@
 import { Activity } from "./Activity";
-import { Image } from "./Image";
+import { ImageData } from "./Image";
 import { Review } from "./Review";
 import { User } from "./User";
 
@@ -14,7 +14,9 @@ export interface Equipment {
     locale: string;
     specifications: string;
     price: number;
-    image: Image[];
+    image: {
+      data: ImageData[];
+    };
     favoriteBy: {
       data: User[];
     };
@@ -30,4 +32,3 @@ export interface Equipment {
 export interface EquipmentResponse {
   data: Equipment[];
 }
-

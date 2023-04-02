@@ -1,4 +1,5 @@
 import { Equipment } from "./Equipment";
+import { Image } from "./Image";
 import { Review } from "./Review";
 
 export interface User {
@@ -16,4 +17,5 @@ export interface User {
   favorites: {
     data: Equipment[];
   };
+  avatar: Image;
 }

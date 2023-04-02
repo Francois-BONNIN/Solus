@@ -10,7 +10,8 @@ interface ImageFormat {
   url: string;
 }
 
-interface ImageAttributes {
+export interface Image {
+  id: number;
   name: string;
   alternativeText: string | null;
   caption: string | null;
@@ -34,9 +35,9 @@ interface ImageAttributes {
   updatedAt: string;
 }
 
-export interface Image {
+export interface ImageData {
   id: number;
-  attributes: ImageAttributes;
+  attributes: Image;
 }
 
 export interface ImageResponse {
