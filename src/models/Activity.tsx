@@ -12,11 +12,12 @@ export interface Activity {
     equipments: {
       data: Equipment[];
     };
-    images: Image;
+    images: {
+      data: Image[];
+    };
   };
 }
 
 export interface ActivityResponse {
   data: Activity[];
 }
-

@@ -30,3 +30,4 @@ export interface Equipment {
 export interface EquipmentResponse {
   data: Equipment[];
 }
+
