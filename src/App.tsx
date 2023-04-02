@@ -1,41 +1,34 @@
-import { useState } from "react";
-import { Route } from "react-router-dom";
+import { RouterProvider } from "react-router-dom";
+import { router } from "./routes/router";
 import { HeaderResponsive } from "./components/Header";
-import { CardMaterials } from "./components/CardMaterials";
-import { ListMaterials } from './components/ListMaterials';
-import { ButtonCategories } from "./components/ButtonCategories";
 import ListHome from "./components/listhome/ListHome";
-import Algo from "./components/Algo";
 
-function App() {
-  const [count, setCount] = useState(0);
+export const App = () => {
   const links = [
     {
-      link: "/", 
-      label: "Home"
+      link: "/",
+      label: "Home",
     },
     {
-      link: "/about", 
-      label: "About"
+      link: "/about",
+      label: "About",
     },
     {
-      link: "/auth/login", 
-      label: "Log In"
+      link: "/auth/login",
+      label: "Log In",
     },
     {
-      link: "/auth/register", 
-      label: "Register"
-    }
-  ]
+      link: "/auth/register",
+      label: "Register",
+    },
+  ];
 
   return (
     <div className="App">
-      
       <HeaderResponsive links={links} />
-      <Algo/>
-      <ListHome/>
+      <ListHome />
+      <RouterProvider router={router} />
     </div>
   );
-}
+};
 
-export default App;

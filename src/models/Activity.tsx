@@ -12,9 +12,6 @@ export interface Activity {
     equipments: {
       data: Equipment[];
     };
-    images: {
-      data: Image[];
-    };
   };
 }
 
