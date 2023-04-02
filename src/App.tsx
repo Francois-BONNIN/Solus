@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Route } from "react-router-dom";
-import { Home } from "./views/Home";
 import { HeaderResponsive } from "./components/Header";
 import { CardMaterials } from "./components/CardMaterials";
 import { ListMaterials } from './components/ListMaterials';
+import { ButtonCategories } from "./components/ButtonCategories";
+import ListHome from "./components/listhome/ListHome";
+import Algo from "./components/Algo";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -30,7 +32,8 @@ function App() {
     <div className="App">
       
       <HeaderResponsive links={links} />
-      <ListMaterials/>
+      <Algo/>
+      <ListHome/>
     </div>
   );
 }
