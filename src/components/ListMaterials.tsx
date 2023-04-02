@@ -32,26 +32,6 @@ export function ListMaterials() {
   const { classes } = useStyles();
 
   const cards = equipments.map((equipment) => (
-    // <Card
-    //   key={equipment.id}
-    //   p="md"
-    //   radius="md"
-    //   component="a"
-    //   href="#"
-    //   className={classes.card}
-    // >
-    //   <AspectRatio ratio={1920 / 1080}>
-    //     <Image
-    //       src={`${imageUrl}${equipment.attributes.image.data[0].attributes.url}`}
-    //     />
-    //   </AspectRatio>
-    //   <Text color="dimmed" size="xs" transform="uppercase" weight={700} mt="md">
-    //     {equipment.attributes.title}
-    //   </Text>
-    //   <Text className={classes.title} mt={5}>
-    //     {equipment.attributes.description}
-    //   </Text>
-    // </Card>
     <Card
       p="lg"
       shadow="lg"

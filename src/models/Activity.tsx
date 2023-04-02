@@ -1,4 +1,4 @@
-import { Image } from "./Image";
+import { ImageData } from "./Image";
 import { Equipment } from "./Equipment";
 
 export interface Activity {
@@ -11,6 +11,9 @@ export interface Activity {
     publishedAt: string;
     equipments: {
       data: Equipment[];
+    };
+    icon: {
+      data: ImageData;
     };
   };
 }
