@@ -1,7 +1,8 @@
 import { RouterProvider } from "react-router-dom";
 import { router } from "./routes/router";
 import { HeaderResponsive } from "./components/Header";
-import ListHome from "./components/listhome/ListHome";
+import { AppShell } from "@mantine/core";
+import { SideBar } from "./components/SideBar";
 
 export const App = () => {
   const links = [
@@ -25,10 +26,21 @@ export const App = () => {
 
   return (
     <div className="App">
-      <HeaderResponsive links={links} />
-      <ListHome />
-      <RouterProvider router={router} />
+      <AppShell
+        padding="md"
+        navbar={<SideBar />}
+        header={<HeaderResponsive links={links} />}
+        styles={(theme) => ({
+          main: {
+            backgroundColor:
+              theme.colorScheme === "dark"
+                ? theme.colors.dark[8]
+                : theme.colors.gray[0],
+          },
+        })}
+      >
+        <RouterProvider router={router} />
+      </AppShell>
     </div>
   );
 };
-

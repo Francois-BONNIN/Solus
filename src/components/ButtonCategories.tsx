@@ -1,25 +1,23 @@
-import { SimpleGrid, Container, Button } from "@mantine/core";
+import { SimpleGrid, Container, Button, Image } from "@mantine/core";
 import { useEffect, useState } from "react";
-import { Activity, ActivityResponse } from "../models/Activity";
+import { Activity } from "../models/Activity";
 import api from "../utils/fetchdata";
+import { imageUrl } from "../utils/image";
 
 export function ButtonCategories() {
   const [activities, setActivities] = useState<Activity[]>([]);
 
   useEffect(() => {
     void api
-      .get("/activities")
+      .get("/activities?populate=icon")
       .json()
       .then((jsonResponse) => {
         setActivities(jsonResponse.data);
-        console.log("jsonResponse", jsonResponse);
       })
       .catch((error) => {
         setActivities([]);
         console.log(error);
       });
-
-    console.log("env : ", import.meta.env.URL_BACKEND);
   }, []);
 
   return (
@@ -31,6 +29,12 @@ export function ButtonCategories() {
             variant="outline"
             color="dark"
           >
+            <Image
+              src={`${imageUrl}${activity.attributes.icon.data.attributes.url}`}
+              pr={"md"}
+              width={100}
+              height={100}
+            />
             {activity.attributes.title}
           </Button>
         ))}

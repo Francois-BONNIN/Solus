@@ -1,8 +1,9 @@
-export const Home = () => {
+import { Title, Group } from "@mantine/core";
 
-    return (
-        <div>
-            <h1>Home</h1>
-        </div>
-    )
-}
+export const Home = () => {
+  return (
+    <Group>
+      <Title>Home</Title>
+    </Group>
+  );
+};
