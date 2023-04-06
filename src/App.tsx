@@ -1,8 +1,8 @@
-import { RouterProvider } from "react-router-dom";
-import { router } from "./routes/router";
 import { HeaderResponsive } from "./components/Header";
 import { AppShell } from "@mantine/core";
 import { SideBar } from "./components/SideBar";
+import { BrowserRouter } from "react-router-dom";
+import { AppRouter } from "./routes/router";
 
 export const App = () => {
   const links = [
@@ -25,7 +25,7 @@ export const App = () => {
   ];
 
   return (
-    <div className="App">
+    <BrowserRouter>
       <AppShell
         padding="md"
         navbar={<SideBar />}
@@ -39,8 +39,8 @@ export const App = () => {
           },
         })}
       >
-        <RouterProvider router={router} />
+        <AppRouter />
       </AppShell>
-    </div>
+    </BrowserRouter>
   );
 };

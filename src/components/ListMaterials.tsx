@@ -8,27 +8,10 @@ import {
   rem,
   Group,
 } from "@mantine/core";
-import { useEffect, useState } from "react";
 import { Equipment } from "../models/Equipment";
 import { imageUrl } from "../utils/image";
-import api from "../utils/fetchdata";
 
-export function ListMaterials() {
-  const [equipments, setEquipments] = useState<Equipment[]>([]);
-
-  useEffect(() => {
-    void api
-      .get("/equipments?populate=image")
-      .json()
-      .then((responseJson) => {
-        setEquipments(responseJson.data);
-      })
-      .catch((error) => {
-        setEquipments([]);
-        console.log(error);
-      });
-  }, []);
-
+export function ListMaterials({ equipments }: { equipments: Equipment[] }) {
   const { classes } = useStyles();
 
   const cards = equipments.map((equipment) => (
@@ -39,6 +22,7 @@ export function ListMaterials() {
       radius="md"
       component="a"
       target="_blank"
+      key={equipment.id}
     >
       <div
         className={classes.image}

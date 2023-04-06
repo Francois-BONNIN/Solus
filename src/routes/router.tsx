@@ -1,41 +1,19 @@
-import { createBrowserRouter } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { Home } from "../views/Home";
+import { ActivityId } from "../views/ActivityID";
 
-export const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home />,
-  },
-  {
-    path: "/services",
-    element: <Home />,
-  },
-  {
-    path: "/materiel",
-    element: <Home />,
-  },
-  {
-    path: "/profile",
-    element: <Home />,
-  },
-  {
-    path: "/profile/edit",
-    element: <Home />,
-  },
-  {
-    path: "/favorites",
-    element: <Home />,
-  },
-  {
-    path: "/about-us",
-    element: <Home />,
-  },
-  {
-    path: "/auth/login",
-    element: <Home />,
-  },
-  {
-    path: "/auth/register",
-    element: <Home />,
-  },
-]);
+export const AppRouter = () => {
+  return (
+    <Routes>
+      <Route path="home" element={<Home />} />
+      <Route path="activities/:id" element={<ActivityId/>} />
+      <Route path="equipments/:id" element={<Home />} />
+      <Route path="profile" element={<Home />} />
+      <Route path="about-us" element={<Home />} />
+      <Route path="auth">
+        <Route path="login" element={<Home />} />
+        <Route path="register" element={<Home />} />
+      </Route>
+    </Routes>
+  );
+};

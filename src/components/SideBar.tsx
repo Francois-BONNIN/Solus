@@ -12,6 +12,7 @@ import { IconSwitchHorizontal, IconLogout } from "@tabler/icons-react";
 import { Activity } from "../models/Activity";
 import api from "../utils/fetchdata";
 import logoBlack from "../assets/img/logoBlack.svg";
+import { Link } from "react-router-dom";
 import { imageUrl } from "../utils/image";
 
 export function SideBar() {
@@ -34,14 +35,13 @@ export function SideBar() {
 
   const links = activities.map((activity) => (
     // rome-ignore lint/a11y/useValidAnchor: <explanation>
-    <a
+    <Link
       className={cx(classes.link, {
         [classes.linkActive]: activity.attributes.title === active,
       })}
-      href="#"
-      key={activity.attributes.title}
-      onClick={(event) => {
-        event.preventDefault();
+      to={`activities/${activity.id}`}
+      key={activity.id}
+      onClick={() => {
         setActive(activity.attributes.title);
       }}
     >
@@ -51,16 +51,17 @@ export function SideBar() {
         width={25}
         height={25}
       />
-      <span>{activity.attributes.title}</span>
-    </a>
+      {activity.attributes.title}
+    </Link>
   ));
 
   return (
     <Navbar width={{ sm: 300 }} p="md" fixed={true}>
       <Navbar.Section grow>
         <Group className={classes.header} position="apart">
-          {/* image asset/img/logo.png */}
-          <Image src={logoBlack} height={30} fit="contain" />
+          <Link to="/home">
+            <Image src={logoBlack} height={30} fit="contain" />
+          </Link>
         </Group>
         {links}
       </Navbar.Section>
