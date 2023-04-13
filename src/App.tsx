@@ -11,7 +11,7 @@ export const App = () => {
       label: "Home",
     },
     {
-      link: "/about",
+      link: "/about-us",
       label: "About",
     },
     {
