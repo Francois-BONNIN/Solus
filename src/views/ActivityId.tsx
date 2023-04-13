@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import api from "../utils/fetchdata";
 import { Equipment } from "../models/Equipment";
 import { Stack, Text, Title } from "@mantine/core";
@@ -12,7 +12,7 @@ export const ActivityId = () => {
   const [activity, setActivity] = useState<Activity>();
   const { id } = useParams();
 
-  useCallback(() => {
+  useEffect(() => {
     api
       .get(`/activities/${id}?populate=equipments.image`)
       .json()
@@ -26,7 +26,6 @@ export const ActivityId = () => {
         console.log(error);
       });
   }, [id]);
-
 
   return (
     <Stack align="center">
