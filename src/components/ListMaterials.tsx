@@ -50,7 +50,7 @@ export function ListMaterials({ equipments }: { equipments: Equipment[] }) {
 
   return (
     <Container py="xl">
-      <SimpleGrid cols={2} breakpoints={[{ maxWidth: "sm", cols: 1 }]}>
+      <SimpleGrid cols={2} breakpoints={[{ cols: 3 }]}>
         {cards}
       </SimpleGrid>
     </Container>
