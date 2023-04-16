@@ -6,24 +6,28 @@ import {
   getStylesRef,
   rem,
   Image,
+  Anchor,
 } from "@mantine/core";
 
-import { IconSwitchHorizontal, IconLogout } from "@tabler/icons-react";
+import { IconUserCircle, IconLogout } from "@tabler/icons-react";
 import { Activity } from "../models/Activity";
 import api from "../utils/fetchdata";
 import logoBlack from "../assets/img/logoBlack.svg";
 import { Link } from "react-router-dom";
 import { imageUrl } from "../utils/image";
+import { useAuth } from "../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 export function SideBar() {
   const { classes, cx } = useStyles();
   const [active, setActive] = useState("Billing");
   const [activities, setActivities] = useState<Activity[]>([]);
+  const { user, logout, isConnected } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     void api
       .get("/activities?populate=icon")
-      .json()
       .then((jsonResponse) => {
         setActivities(jsonResponse.data);
       })
@@ -34,7 +38,6 @@ export function SideBar() {
   }, []);
 
   const links = activities.map((activity) => (
-    // rome-ignore lint/a11y/useValidAnchor: <explanation>
     <Link
       className={cx(classes.link, {
         [classes.linkActive]: activity.attributes.title === active,
@@ -66,27 +69,26 @@ export function SideBar() {
         {links}
       </Navbar.Section>
 
-      <Navbar.Section className={classes.footer}>
-        {/* rome-ignore lint/a11y/useValidAnchor: <explanation> */}
-        <a
-          href="#"
-          className={classes.link}
-          onClick={(event) => event.preventDefault()}
-        >
-          <IconSwitchHorizontal className={classes.linkIcon} stroke={1.5} />
-          <span>Change account</span>
-        </a>
+      {isConnected && (
+        <Navbar.Section className={classes.footer}>
+          <Link to="/profile" className={classes.link}>
+            <IconUserCircle className={classes.linkIcon} stroke={1.5} />
+            <span>{user?.username}</span>
+          </Link>
 
-        {/* rome-ignore lint/a11y/useValidAnchor: <explanation> */}
-        <a
-          href="#"
-          className={classes.link}
-          onClick={(event) => event.preventDefault()}
-        >
-          <IconLogout className={classes.linkIcon} stroke={1.5} />
-          <span>Logout</span>
-        </a>
-      </Navbar.Section>
+          <Anchor
+            underline={false}
+            className={classes.link}
+            onClick={() => {
+              logout();
+              navigate("/auth");
+            }}
+          >
+            <IconLogout className={classes.linkIcon} stroke={1.5} />
+            <span>Logout</span>
+          </Anchor>
+        </Navbar.Section>
+      )}
     </Navbar>
   );
 }

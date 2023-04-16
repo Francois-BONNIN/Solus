@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 import { Home } from "../views/Home";
 import { ActivityId } from "../views/ActivityId";
-import { About } from "../components/About";
-import { Login } from "../components/Login";
-import { Register } from "../components/Register";
+import { About } from "../views/About";
+import { Auth } from "../views/Auth";
+import { Profile } from "../views/Profile";
 
 export const AppRouter = () => {
   return (
@@ -12,12 +12,9 @@ export const AppRouter = () => {
       <Route path="home" element={<Home />} />
       <Route path="activities/:id" element={<ActivityId />} />
       <Route path="equipments/:id" element={<Home />} />
-      <Route path="profile" element={<Home />} />
+      <Route path="profile" element={<Profile />} />
       <Route path="about-us" element={<About />} />
-      <Route path="auth">
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
-      </Route>
+      <Route path="auth" element={<Auth />} />
     </Routes>
   );
 };
