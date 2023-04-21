@@ -6,24 +6,23 @@ import {
   getStylesRef,
   rem,
   Image,
-  Anchor,
+  Stack,
 } from "@mantine/core";
 
-import { IconUserCircle, IconLogout } from "@tabler/icons-react";
+import { IconUserCircle } from "@tabler/icons-react";
 import { Activity } from "../models/Activity";
 import api from "../utils/fetchdata";
 import logoBlack from "../assets/img/logoBlack.svg";
-import { Link } from "react-router-dom";
 import { imageUrl } from "../utils/image";
 import { useAuth } from "../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { DisplayInfoUser } from "./DisplayInfoUser";
 
 export function SideBar() {
   const { classes, cx } = useStyles();
-  const [active, setActive] = useState("Billing");
+  const [active, setActive] = useState("");
   const [activities, setActivities] = useState<Activity[]>([]);
-  const { user, logout, isConnected } = useAuth();
-  const navigate = useNavigate();
+  const { isConnected } = useAuth();
 
   useEffect(() => {
     void api
@@ -61,33 +60,25 @@ export function SideBar() {
   return (
     <Navbar width={{ sm: 300 }} p="md" fixed={true}>
       <Navbar.Section grow>
-        <Group className={classes.header} position="apart">
+        <Group className={classes.header} position="center">
           <Link to="/home">
             <Image src={logoBlack} height={30} fit="contain" />
           </Link>
         </Group>
-        {links}
+        <Stack className="gap-0">{links}</Stack>
       </Navbar.Section>
 
-      {isConnected && (
-        <Navbar.Section className={classes.footer}>
-          <Link to="/profile" className={classes.link}>
-            <IconUserCircle className={classes.linkIcon} stroke={1.5} />
-            <span>{user?.username}</span>
-          </Link>
-
-          <Anchor
-            underline={false}
-            className={classes.link}
-            onClick={() => {
-              logout();
-              navigate("/auth");
-            }}
-          >
-            <IconLogout className={classes.linkIcon} stroke={1.5} />
-            <span>Logout</span>
-          </Anchor>
-        </Navbar.Section>
+      {isConnected ? (
+        <DisplayInfoUser />
+      ) : (
+        <Link to="/auth" className={classes.link}>
+          <IconUserCircle
+            className={classes.linkIcon}
+            stroke={1.5}
+            color="black"
+          />
+          <span>Login</span>
+        </Link>
       )}
     </Navbar>
   );
