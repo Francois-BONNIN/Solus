@@ -1,3 +1,4 @@
+import { useQuery } from "@tanstack/react-query";
 import { notifications } from "@mantine/notifications";
 import { useContext } from "react";
 import { useLocalStorage } from "./useLocalStorage";
@@ -12,18 +13,21 @@ export const useAuth = () => {
   const { user, setUser, isConnected, setIsConnected } =
     useContext(AuthContext);
 
+  const { data, refetch } = useQuery({
+    queryKey: ["user"],
+    queryFn: () =>
+      api.get("/users/me?populate=avatar", {
+        headers: { Authorization: `Bearer ${getItem("token")}` },
+      }),
+    enabled: false,
+    onSuccess: (data: User) => setUser(data),
+  });
+
   const login = (jwt: string) => {
     addJwtUser(jwt);
     setIsConnected(true);
-    const jwtToken = getItem("token");
-    api
-      .get("/users/me?populate=avatar", {
-        headers: { Authorization: `Bearer ${jwtToken}` },
-      })
-      .then((user: User) => {
-        setUser(user);
-        console.log("user", user);
-      });
+    refetch();
+    console.log(data);
   };
 
   const logout = () => {

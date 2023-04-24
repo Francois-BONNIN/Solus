@@ -9,13 +9,13 @@ import {
   Stack,
 } from "@mantine/core";
 
-import { IconUserCircle } from "@tabler/icons-react";
 import { Activity } from "../models/Activity";
 import api from "../utils/fetchdata";
 import logoBlack from "../assets/img/logoBlack.svg";
 import { imageUrl } from "../utils/image";
 import { useAuth } from "../hooks/useAuth";
 import { Link } from "react-router-dom";
+import { IconUserCircle } from "@tabler/icons-react";
 import { DisplayInfoUser } from "./DisplayInfoUser";
 
 export function SideBar() {
