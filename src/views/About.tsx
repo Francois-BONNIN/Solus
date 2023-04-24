@@ -6,6 +6,9 @@ import {
   Group,
   rem,
 } from "@mantine/core";
+import { MapContainer, Marker, TileLayer, Tooltip } from "react-leaflet";
+import "./about.css";
+import "leaflet/dist/leaflet.css";
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -76,48 +79,71 @@ export function About() {
   const { classes } = useStyles();
 
   return (
-    <div className={classes.wrapper}>
-      <Container size={700} className={classes.inner}>
-        <h1 className={classes.title}>
-          Un{" "}
-          <Text
-            component="span"
-            variant="gradient"
-            gradient={{ from: "blue", to: "cyan" }}
-            inherit
-          >
-            assistant réactif
-          </Text>{" "}
-          adapté à vos besoins
-        </h1>
+    <>
+      <div className={classes.wrapper}>
+        <Container size={700} className={classes.inner}>
+          <h1 className={classes.title}>
+            Un{" "}
+            <Text
+              component="span"
+              variant="gradient"
+              gradient={{ from: "blue", to: "cyan" }}
+              inherit
+            >
+              assistant réactif
+            </Text>{" "}
+            adapté à vos besoins
+          </h1>
 
-        <Text className={classes.description} color="dimmed">
-          Notre site permet de trouver rapidement le matériel informatique
-          adapté à vos besoins, grâce à une expérience intuitive et un assistant
-          réactif.
-        </Text>
+          <Text className={classes.description} color="dimmed">
+            Notre site permet de trouver rapidement le matériel informatique
+            adapté à vos besoins, grâce à une expérience intuitive et un
+            assistant réactif.
+          </Text>
 
-        <Group className={classes.controls}>
-          <Button
-            size="xl"
-            className={classes.control}
-            variant="gradient"
-            gradient={{ from: "blue", to: "cyan" }}
-          >
-            Découvrir
-          </Button>
+          <Group className={classes.controls}>
+            <Button
+              size="xl"
+              component="a"
+              href="activities/2"
+              className={classes.control}
+              variant="gradient"
+              gradient={{ from: "blue", to: "cyan" }}
+            >
+              Découvrir
+            </Button>
 
-          <Button
-            component="a"
-            href=""
-            size="xl"
-            variant="default"
-            className={classes.control}
-          >
-            Non Merci
-          </Button>
-        </Group>
-      </Container>
-    </div>
+            <Button
+              component="a"
+              href="activities/2"
+              size="xl"
+              variant="default"
+              className={classes.control}
+            >
+              Non Merci
+            </Button>
+          </Group>
+        </Container>
+      </div>
+      <MapContainer
+        center={[43.610374839854614, 1.4319977420504015]}
+        zoom={13}
+        scrollWheelZoom={false}
+      >
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        <Marker position={[43.610374839854614, 1.4319977420504015]}>
+          <Tooltip direction="bottom" offset={[-16, 26]} opacity={1} permanent>
+            Siège Solus
+          </Tooltip>
+        </Marker>
+      </MapContainer>
+    </>
   );
+}
+
+{
+  /* <Marker position={[43.610374839854614, 1.4319977420504015]}></Marker> */
 }
