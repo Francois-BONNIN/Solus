@@ -15,7 +15,6 @@ export const ActivityId = () => {
   useEffect(() => {
     api
       .get(`/activities/${id}?populate=equipments.image`)
-      .json()
       .then((responseJson) => {
         setActivity(responseJson.data);
         setEquipments(responseJson.data.attributes.equipments.data);
@@ -29,9 +28,11 @@ export const ActivityId = () => {
 
   return (
     <Stack align="center">
-      <Stack align="center">
+      <Stack align="center" p="10">
         <Title>{activity?.attributes.title}</Title>
-        <Text>{activity?.attributes.description}</Text>
+        <Text w="clamp(60%, 60vw, 100%)" align="center">
+          {activity?.attributes.description}
+        </Text>
       </Stack>
       <ListMaterials equipments={equipments} />
     </Stack>

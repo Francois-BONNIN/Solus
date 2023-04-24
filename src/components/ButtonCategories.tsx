@@ -10,7 +10,6 @@ export function ButtonCategories() {
   useEffect(() => {
     void api
       .get("/activities?populate=icon")
-      .json()
       .then((jsonResponse) => {
         setActivities(jsonResponse.data);
       })

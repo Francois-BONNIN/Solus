@@ -14,19 +14,34 @@ import { Link } from "react-router-dom";
 
 const HEADER_HEIGHT = rem(60);
 interface HeaderResponsiveProps {
-  links: { link: string; label: string }[];
+  links: { link: string; label: string; param: string | null }[];
 }
 
-export function HeaderResponsive({ links }: HeaderResponsiveProps) {
+const links = [
+  {
+    link: "/",
+    label: "Home",
+  },
+  {
+    link: "/about-us",
+    label: "About",
+  },
+  {
+    link: "/auth",
+    label: "Log In",
+    param: "login",
+  },
+];
+
+export function HeaderResponsive() {
   const [opened, { toggle, close }] = useDisclosure(false);
   const [active, setActive] = useState(links[0].link);
   const { classes, cx } = useStyles();
 
   const items = links.map((link) => (
-
     <Link
       key={link.label}
-      to={link.link}
+      to={`${link.link}${link.param ? `?param=${link.param}` : ""}`}
       className={cx(classes.link, {
         [classes.linkActive]: active === link.link,
       })}

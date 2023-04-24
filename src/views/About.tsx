@@ -6,7 +6,7 @@ import {
   Group,
   rem,
 } from "@mantine/core";
-import { MapContainer, Marker, Popup, TileLayer, Tooltip, useMap } from "react-leaflet";
+import { MapContainer, Marker, TileLayer, Tooltip } from "react-leaflet";
 import "./about.css";
 import "leaflet/dist/leaflet.css";
 
