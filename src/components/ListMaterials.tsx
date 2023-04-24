@@ -7,12 +7,23 @@ import {
   getStylesRef,
   rem,
   Group,
+  Modal,
+  Stack,
+  Image,
 } from "@mantine/core";
 import { Equipment } from "../models/Equipment";
 import { imageUrl } from "../utils/image";
+import { useDisclosure, useMediaQuery } from "@mantine/hooks";
+import { useState } from "react";
+import { Title } from "@mantine/core";
+import { ModalEquipment } from "./modalEquipment";
 
 export function ListMaterials({ equipments }: { equipments: Equipment[] }) {
   const { classes } = useStyles();
+
+  const [opened, { open, close }] = useDisclosure(false);
+
+  const [selectedEquipment, setSelectedEquipment] = useState<Equipment>();
 
   const cards = equipments.map((equipment) => (
     <Card
@@ -23,6 +34,10 @@ export function ListMaterials({ equipments }: { equipments: Equipment[] }) {
       component="a"
       target="_blank"
       key={equipment.id}
+      onClick={() => {
+        setSelectedEquipment(equipment);
+        open();
+      }}
     >
       <div
         className={classes.image}
@@ -49,11 +64,27 @@ export function ListMaterials({ equipments }: { equipments: Equipment[] }) {
   ));
 
   return (
-    <Container py="xl">
-      <SimpleGrid cols={2} breakpoints={[{ cols: 3 }]}>
-        {cards}
-      </SimpleGrid>
-    </Container>
+    <div>
+      <Container py="xl">
+        <SimpleGrid cols={2} breakpoints={[{ cols: 3 }]}>
+          {cards}
+        </SimpleGrid>
+      </Container>
+
+      <Modal
+        size="100%"
+        opened={opened}
+        onClose={close}
+        withCloseButton={false}
+        transitionProps={{ transition: "fade", duration: 200 }}
+      >
+        {selectedEquipment && (
+          <>
+          <ModalEquipment selectedEquipment={selectedEquipment}/>
+          </>
+        )}
+      </Modal>
+    </div>
   );
 }
 
