@@ -11,8 +11,15 @@
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
-    "@mantine/core": "^6.0.2",
-    "@mantine/hooks": "^6.0.2",
+    "@mantine/core": "^6.0.7",
+    "@mantine/ds": "^6.0.7",
+    "@mantine/form": "^6.0.7",
+    "@mantine/hooks": "^6.0.7",
+    "@mantine/notifications": "^6.0.7",
+    "@mantine/prism": "^6.0.7",
+    "@tabler/icons-react": "^2.13.1",
+    "@tanstack/react-query": "^4.29.3",
+    "framer-motion": "^10.11.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.9.0"
@@ -23,8 +30,8 @@
     "@vitejs/plugin-react": "^3.1.0",
     "autoprefixer": "^10.4.14",
     "postcss": "^8.4.21",
-    "tailwindcss": "^3.3.0",
     "rome": "12.0.0",
+    "tailwindcss": "^3.3.0",
     "typescript": "^4.9.3",
     "vite": "^4.2.0"
   }
