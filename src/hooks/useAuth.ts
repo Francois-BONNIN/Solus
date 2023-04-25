@@ -3,9 +3,9 @@ import { notifications } from "@mantine/notifications";
 import { useContext } from "react";
 import { useLocalStorage } from "./useLocalStorage";
 import { useToken } from "./useToken";
-import { User } from "../models/User";
 import api from "../utils/fetchdata";
 import { AuthContext } from "../providers/AuthContext";
+import { User } from "../models/User";
 
 export const useAuth = () => {
   const { addJwtUser, removeJwtUser } = useToken();
@@ -16,18 +16,16 @@ export const useAuth = () => {
   const { data, refetch } = useQuery({
     queryKey: ["user"],
     queryFn: () =>
-      api.get("/users/me?populate=avatar", {
+      api.get("/users/me?populate=*", {
         headers: { Authorization: `Bearer ${getItem("token")}` },
       }),
-    enabled: false,
+    enabled: !!getItem("token"),
     onSuccess: (data: User) => setUser(data),
   });
 
   const login = (jwt: string) => {
     addJwtUser(jwt);
-    setIsConnected(true);
-    refetch();
-    console.log(data);
+    if (!isConnected) setIsConnected(true);
   };
 
   const logout = () => {

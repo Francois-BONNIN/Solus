@@ -14,8 +14,6 @@ export interface User {
   reviews: {
     data: Review[];
   };
-  favorites: {
-    data: Equipment[];
-  };
+  favorites: Equipment[];
   avatar: Image;
 }

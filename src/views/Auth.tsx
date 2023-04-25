@@ -54,8 +54,6 @@ export function Auth() {
   }, [param]);
 
   const handleSubmit = () => {
-    console.log("submit");
-
     const authPath = type === "login" ? "/auth/local/" : "/auth/local/register";
     notifications.show({
       id: "auth",
@@ -94,7 +92,6 @@ export function Auth() {
           loading: false,
           autoClose: 6000,
         });
-        console.log(response);
       });
   };
 

@@ -8,22 +8,54 @@ import {
   rem,
   Group,
   Modal,
-  Stack,
-  Image,
 } from "@mantine/core";
 import { Equipment } from "../models/Equipment";
 import { imageUrl } from "../utils/image";
-import { useDisclosure, useMediaQuery } from "@mantine/hooks";
+import { useDisclosure } from "@mantine/hooks";
 import { useState } from "react";
-import { Title } from "@mantine/core";
 import { ModalEquipment } from "./modalEquipment";
+import api from "../utils/fetchdata";
+import { useAuth } from "../hooks/useAuth";
+import { notifications } from "@mantine/notifications";
 
 export function ListMaterials({ equipments }: { equipments: Equipment[] }) {
   const { classes } = useStyles();
+  const { user, isConnected } = useAuth();
 
   const [opened, { open, close }] = useDisclosure(false);
 
   const [selectedEquipment, setSelectedEquipment] = useState<Equipment>();
+
+  const handleFavorite = (idEquipment: number, isFavorite: boolean) => {
+    if (!isConnected) {
+      notifications.show({
+        title: "Erreur",
+        message:
+          "Vous devez être connecté pour ajouter un équipement à vos favoris",
+        color: "red",
+      });
+      return;
+    }
+
+    const action = isFavorite ? "disconnect" : "connect";
+    const message = isFavorite
+      ? "L'équipement a bien été supprimé de vos favoris"
+      : "L'équipement a bien été ajouté à vos favoris";
+
+    api
+      .put(`/users/${user?.id}`, {
+        favorites: {
+          [action]: [idEquipment],
+        },
+      })
+      .then(() => {
+        notifications.show({
+          title: "Succès",
+          message,
+          color: "green",
+        });
+      });
+  };
 
   const cards = equipments.map((equipment) => (
     <Card
@@ -80,7 +112,10 @@ export function ListMaterials({ equipments }: { equipments: Equipment[] }) {
       >
         {selectedEquipment && (
           <>
-          <ModalEquipment selectedEquipment={selectedEquipment}/>
+            <ModalEquipment
+              selectedEquipment={selectedEquipment}
+              handleFavorite={handleFavorite}
+            />
           </>
         )}
       </Modal>

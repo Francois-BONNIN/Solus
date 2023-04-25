@@ -35,6 +35,13 @@ const getCustomFetch = (
         body: JSON.stringify(data),
       });
     },
+    put: (url: string, data: unknown, config?: RequestInit) => {
+      return fetch(url, {
+        ...config,
+        method: "PUT",
+        body: JSON.stringify(data),
+      });
+    },
   };
 };
 
