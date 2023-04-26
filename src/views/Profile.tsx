@@ -26,7 +26,9 @@ export function Profile() {
   return (
     <div>
       <Group noWrap>
-        <Avatar src={`${imageUrl}${user.avatar.url}`} size={94} radius="md" />
+        {user.avatar && (
+          <Avatar radius="xl" src={`${imageUrl}${user.avatar.url}`} size={94}/>
+        )}
         <div>
           <Text fz="lg" fw={500} className={classes.name}>
             {user.username}

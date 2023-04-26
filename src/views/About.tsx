@@ -7,7 +7,8 @@ import {
   rem,
 } from "@mantine/core";
 import "./about.css";
-// import "leaflet/dist/leaflet.css";
+import { MapContainer, Marker, TileLayer, Tooltip } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -124,7 +125,7 @@ export function About() {
           </Group>
         </Container>
       </div>
-      {/* <MapContainer
+      <MapContainer 
         center={[43.610374839854614, 1.4319977420504015]}
         zoom={13}
         scrollWheelZoom={false}
@@ -138,7 +139,7 @@ export function About() {
             Siège Solus
           </Tooltip>
         </Marker>
-      </MapContainer> */}
+      </MapContainer>
     </>
   );
 }
