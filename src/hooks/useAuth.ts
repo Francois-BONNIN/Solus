@@ -13,7 +13,7 @@ export const useAuth = () => {
   const { user, setUser, isConnected, setIsConnected } =
     useContext(AuthContext);
 
-  const { data, refetch } = useQuery({
+  useQuery({
     queryKey: ["user"],
     queryFn: () =>
       api.get("/users/me?populate=*", {

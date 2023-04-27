@@ -74,8 +74,8 @@ export function Auth() {
       .then((response) => {
         notifications.update({
           id: "auth",
-          title: `Welcome ${response.user.username}`,
-          message: "Congratulations, you have successfully connected",
+          title: `Bienvenue ${response.user.username}`,
+          message: "Vous êtes maintenant connecté",
           color: "teal",
           loading: false,
           autoClose: 4000,
